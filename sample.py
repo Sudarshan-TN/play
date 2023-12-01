@@ -52,6 +52,7 @@ def get_local_container_info():
 def main():
 
     metadata = boto.utils.get_instance_metadata()
+    print('-META- ',metadata)
     region = metadata['placement']['availability-zone'][:-1]  # last char is the zone, which we don't care about
 
     ecs_metadata = requests.get(get_ecs_introspection_url('metadata')).json()
