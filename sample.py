@@ -51,12 +51,8 @@ def get_local_container_info():
 
 def main():
 
-    metadata = boto.utils.get_instance_metadata()
-    print('-META- ',metadata)
-    region = metadata['placement']['availability-zone'][:-1]  # last char is the zone, which we don't care about
-
-    ecs_metadata = requests.get(get_ecs_introspection_url('metadata')).json()
-    cluster = ecs_metadata['Cluster']
+    region = os.environ["AWS_REGION"] # last char is the zone, which we don't care about
+    cluster = os.environ["CLUSTER"]
 
     container_name, task_arn = get_local_container_info()
 
