@@ -25,12 +25,12 @@ def get_local_container_info():
     # get the docker container id
     # http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-introspection.html
     docker_id = os.path.basename(get_contents("/proc/1/cpuset")).strip()
-
+    print('----------------docker_id ',docker_id)
     if docker_id is None:
         raise Exception("Unable to find docker id")
 
     ecs_local_task = requests.get(get_ecs_introspection_url('tasks') + '?dockerid=' + docker_id).json()
-
+    print('------------------ecs_local_task ',ecs_local_task)
     task_arn = ecs_local_task['Arn']
 
     if task_arn is None:
@@ -64,7 +64,7 @@ def main():
             task_arn,
         ]
     )
-
+    print('-----------------ECS Describe: ', response)
     task = None
     if contains_key(response, 'tasks'):
         for t in response['tasks']:
