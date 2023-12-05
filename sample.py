@@ -1,9 +1,9 @@
 import requests
 
 try:
-    response = requests.get('http://localhost:51678/v1/metadata')
+    response = requests.get('http://169.254.170.2/v3/metadata')
     response.raise_for_status()
     metadata = response.json()
-    print(metadata)
+    print('METADATA:    ', metadata)
 except requests.exceptions.RequestException as e:
     print(f'Failed to retrieve ECS container metadata: {e}')
