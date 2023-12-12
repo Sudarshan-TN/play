@@ -58,4 +58,4 @@ try:
 finally:
     connection.close()
 payload_message = AgentMessagePayload.parse(response[message.HeaderLength:])
-print(payload_message.Payload)
+print(payload_message.Payload.split()[0])
